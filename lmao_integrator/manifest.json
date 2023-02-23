@@ -2,12 +2,12 @@
     "name": "LMAO Overleaf Integration",
     "version": "0.3.5",
     "description": "A LaTeX neural autocomplete plugin for Overleaf",
-    "permissions": ["activeTab", "declarativeContent", "storage", "http://127.0.0.1:8000/*", "https://h0sywlk4gh.execute-api.eu-west-1.amazonaws.com/test-lmao-en/invoke-lmao"],
+    "permissions": ["activeTab", "declarativeContent", "storage"],
+    "host_permissions": ["http://127.0.0.1:8000/*", "https://h0sywlk4gh.execute-api.eu-west-1.amazonaws.com/test-lmao-en/invoke-lmao"],
     "background": {
-        "scripts": ["background.js"],
-        "persistent": false
+        "service_worker": "background.js"
     },
-    "page_action": {
+    "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "images/extension_thumb16.png",
@@ -24,9 +24,13 @@
         "128": "images/extension_thumb128.png",
         "256": "images/extension_thumb256.png"
     },
-    "web_accessible_resources": ["injector.js", "config.json"],
+    "web_accessible_resources": [{
+        "resources": ["injector.js", "config.json"],
+        "matches": [],
+	"extension_ids": []
+    }],
     "externally_connectable": {
         "matches": ["https://*.overleaf.com/project/*"]
     },
-    "manifest_version": 2
+    "manifest_version": 3
 }
