@@ -3,7 +3,10 @@ function inject_script() {
   console.log("Running injector script")
   setTimeout(() => {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.executeScript(tabs[0].id, {file: 'contentScript.js'});
+      chrome.scripting.executeScript({
+	target: {tabId: tabs[0].id, allFrames: true},
+	files: ['contentScript.js'],
+	});
     });
   }, 50);
 }
